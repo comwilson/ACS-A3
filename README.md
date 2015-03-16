@@ -6,9 +6,9 @@ This is repo for my digitial forensics / steganography assignment for computer s
 The two main components are the two python scripts: imgrecovery.py and stegimg.py
 
 ###imgrecovery.py
-
-*usage: imgrecovery.py <file name>
-
+```
+usage: imgrecovery.py <file name> <algorithm #>
+```
 ###stegimg.py
 
 MORE INFO
