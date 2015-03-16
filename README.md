@@ -10,5 +10,6 @@ The two main components are the two python scripts: imgrecovery.py and stegimg.p
 usage: imgrecovery.py <file name> <algorithm #>
 ```
 ###stegimg.py
-
-MORE INFO
+```
+usage: stegimg.py <encode|decode> <file name> [message]
+```
