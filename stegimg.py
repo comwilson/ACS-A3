@@ -35,9 +35,12 @@ def main():
 
 	message = ""
 	if mode == "encode":
-		message = sys.argv[3]
+		for n in sys.argv[3]:
+			message += bin(ord(n))[2:].zfill(8)
+			print bin(ord(n))[2:].zfill(8)
+		message += '00000000'
 		message_index = 0
-
+		print "binary message: " + message
 	print im.size
 	pic = im.load()
 
@@ -48,17 +51,30 @@ def main():
 			#print c
 			if mode == "encode":
 				if (message_index < len(message)):
-					print message[message_index]
-					pic[x, y] = (c[0], c[1], ord(message[message_index]))
+					#print message[message_index]
+					encoded_value = bin(c[2])[:-1] + message[message_index]
+					pic[x, y] = (c[0], c[1], int(encoded_value, 2))
 					message_index += 1
 			else:
 				#print chr(pic[x,y][2])
-				message += chr(c[2])
+				message += bin(c[2])[-1]
 	if mode == "encode":
-		im.save(file_name)
+		extension_index = file_name.find(".")
+		if extension_index > 1:
+			output_file = file_name[:extension_index]
+		else:
+			output_file = file_name
+		im.save(output_file + ".png")
 	else:
+		output_message = ""
+		for i in range(0, len(message), 8):
+			binary_value = '0b' + message[i:i+8]
+			if binary_value == '0b00000000':
+				break
+			output_message += chr(int(binary_value, 2))
+		print "message: " + output_message
 		with open("output.txt", "w") as f:
-			f.write(message)
+			f.write(output_message)
 
 main()
 
